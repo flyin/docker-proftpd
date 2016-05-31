@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+sed -i "s/SQLConnectInfo XXX/SQLConnectInfo $POSTGRES_ONSERVER_DATABASE_NAME@$POSTGRES_ONSERVER_DATABASE_HOST $POSTGRES_ONSERVER_DATABASE_USER $POSTGRES_ONSERVER_DATABASE_PASSWORD/" /etc/proftpd/sql.conf
+
+exec proftpd --nodaemon
