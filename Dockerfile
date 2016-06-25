@@ -14,6 +14,6 @@ COPY sql.conf /etc/proftpd
 COPY entrypoint.sh /usr/local/bin/
 
 EXPOSE 20-21
-EXPOSE 50000-55000
+EXPOSE 50000-50020
 
 CMD ["entrypoint.sh"]
