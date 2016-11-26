@@ -3,7 +3,7 @@
   SQLEngine on
   SQLAuthenticate users groups
   SQLAuthTypes OpenSSL Crypt
-  SQLConnectInfo XXX
+  SQLConnectInfo ${PROFTPD_DATABASE_NAME}@${PROFTPD_DATABASE_HOST} ${PROFTPD_DATABASE_USER} ${PROFTPD_DATABASE_PASSWORD}
   SQLUserInfo user_ftpuser name password uid gid home shell
   SQLGroupInfo user_ftpgroup name gid members
 

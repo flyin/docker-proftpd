@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-sed -i "s/SQLConnectInfo XXX/SQLConnectInfo $PROFTPD_DATABASE_NAME@$PROFTPD_DATABASE_HOST $PROFTPD_DATABASE_USER $PROFTPD_DATABASE_PASSWORD/" /etc/proftpd/sql.conf
-
-# TODO: Check connect to mysql database
+envsubst < /templates/sql.template > /etc/proftpd/sql.conf
+envsubst < /templates/proftpd.template > /etc/proftpd/proftpd.conf
+envsubst < /templates/modules.template > /etc/proftpd/modules.conf
 
 exec proftpd --nodaemon

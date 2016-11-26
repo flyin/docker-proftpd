@@ -18,7 +18,7 @@ DenyFilter			\*.*/
 DefaultRoot			~
 RequireValidShell		off
 Port				21
-PassivePorts                    50000 50020
+PassivePorts                    ${FTP_PASSIVE_LOW} ${FTP_PASSIVE_HIGH}
 MaxInstances			30
 User				proftpd
 Group				nogroup
