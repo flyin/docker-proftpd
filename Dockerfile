@@ -8,5 +8,5 @@ RUN mkdir -p /var/run/proftpd \
   && apt-get install -f -y proftpd proftpd-mod-mysql
 
 COPY templates/ /templates
-
-CMD ["entrypoint.sh"]
+COPY entrypoint.sh /entrypoint.sh
+CMD ["/entrypoint.sh"]
