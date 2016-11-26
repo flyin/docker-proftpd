@@ -5,8 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN mkdir -p /var/run/proftpd \
   && apt-get update \
-  && apt-get install -f -y proftpd proftpd-mod-pgsql
-
+  && apt-get install -f -y proftpd proftpd-mod-mysql
 
 COPY proftpd.conf /etc/proftpd
 COPY modules.conf /etc/proftpd
