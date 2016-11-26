@@ -11,5 +11,6 @@ RUN mkdir -p /var/run/proftpd \
   && apt-get update \
   && apt-get install -f -y proftpd proftpd-mod-mysql gettext-base
 
+EXPOSE 20 21
 COPY entrypoint.sh /
 CMD ["/entrypoint.sh"]
