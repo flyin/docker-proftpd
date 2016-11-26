@@ -4,8 +4,8 @@
   SQLAuthenticate users groups
   SQLAuthTypes OpenSSL Crypt
   SQLConnectInfo ${DATABASE_NAME}@${DATABASE_HOST}:${DATABASE_PORT} ${DATABASE_USER} ${DATABASE_PASSWORD}
-  SQLUserInfo user_ftpuser name password uid gid home shell
-  SQLGroupInfo user_ftpgroup name gid members
+  SQLUserInfo ftp_user name password uid gid home shell
+  SQLGroupInfo ftp_group name gid members
 
   SQLMinUserUID 1000
   SQLMinUserGID 1000
@@ -14,8 +14,8 @@
 </IfModule>
 
 <IfModule mod_wrap2_sql.c>
-  SQLNamedQuery get-allowed-clients SELECT "allowed FROM user_ftpaccess WHERE name = '%{0}'"
-  SQLNamedQuery get-denied-clients SELECT "denied FROM user_ftpaccess WHERE name = '%{0}'"
+  SQLNamedQuery get-allowed-clients SELECT "allowed FROM ftp_access WHERE name = '%{0}'"
+  SQLNamedQuery get-denied-clients SELECT "denied FROM ftp_access WHERE name = '%{0}'"
   WrapEngine on
   WrapLog /var/log/proftpd/wrap2.log
   WrapTables sql:/get-allowed-clients sql:/get-denied-clients
