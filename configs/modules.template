@@ -5,6 +5,7 @@ LoadModule mod_ctrls_admin.c
 LoadModule mod_tls.c
 LoadModule mod_sql.c
 LoadModule mod_sql_mysql.c
+LoadModule mod_sql_passwd.c
 LoadModule mod_radius.c
 LoadModule mod_quotatab.c
 LoadModule mod_quotatab_file.c

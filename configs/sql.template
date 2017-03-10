@@ -1,22 +1,26 @@
 <IfModule mod_sql.c>
   SQLBackend mysql
   SQLEngine on
-  SQLAuthenticate users groups
-  SQLAuthTypes OpenSSL Crypt
+  SQLAuthenticate users
   SQLConnectInfo ${DATABASE_NAME}@${DATABASE_HOST}:${DATABASE_PORT} ${DATABASE_USER} ${DATABASE_PASSWORD}
-  SQLUserInfo ftp_user name password uid gid home shell
-  SQLGroupInfo ftp_group name gid members
-
   SQLMinUserUID 1000
   SQLMinUserGID 1000
-
-  SQLLogFile /var/log/proftpd/sql.log
+  SQLAuthTypes pbkdf2
+  SQLPasswordPBKDF2 sha256 30000 32
+  SQLPasswordUserSalt sql:/GetUserSalt
+  SQLUserInfo custom:/LookupUser
+  SQLNamedQuery GetUserSalt SELECT "substring(password from 21 for 12) AS salt FROM ftp_user WHERE name='%U'"
+  SQLNamedQuery	LookupUser SELECT "name, substring(password from 34 for 44) AS password, uid, gid, home, shell FROM ftp_user WHERE name='%U'"
 </IfModule>
 
 <IfModule mod_wrap2_sql.c>
+  WrapEngine on
+  WrapTables sql:/get-allowed-clients sql:/get-denied-clients
   SQLNamedQuery get-allowed-clients SELECT "allowed FROM ftp_access WHERE name = '%{0}'"
   SQLNamedQuery get-denied-clients SELECT "denied FROM ftp_access WHERE name = '%{0}'"
-  WrapEngine on
-  WrapLog /var/log/proftpd/wrap2.log
-  WrapTables sql:/get-allowed-clients sql:/get-denied-clients
+</IfModule>
+
+<IfModule mod_sql_passwd.c>
+  SQLPasswordEngine on
+  SQLPasswordEncoding base64
 </IfModule>
